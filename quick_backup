@@ -1,0 +1,6 @@
+quickbackup()
+	{
+	tar -caf "support-backup.tar.gz" *
+	clear
+	echo "Backup is finished, located in $1/support-backup.tar.gz" | mail -S "Backup Notification" $2
+	}

@@ -1,0 +1,10 @@
+site_watch()
+	{
+	clear;
+	echo $1 >> site_watch_$1.txt;
+	echo $(date) >> site_watch_$1.txt;
+	wget --server-response wget -r -np -R "index.html*" $1 2>&1 | awk '/^  HTTP/{print $2}' >> $HOME/site_watch_$1.txt;
+	clear ; 
+	cat $HOME/site_watch_$1.txt;
+	}
+

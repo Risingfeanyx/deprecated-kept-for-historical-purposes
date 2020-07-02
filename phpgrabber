@@ -1,0 +1,14 @@
+phpgrab()
+	{
+	clear
+	echo "<?php phpinfo(); ?>" >> phpinfo.php
+	cp -v php.ini{,.bak_$(date +%F)}
+	#cp /opt/imh/imh-php$1/root/usr/lib/php/php.ini .
+	#cp /opt/cpanel/ea-php$1/root/etc/php.ini .
+	cp /usr/local/lib/php.ini .
+	cp -v .htaccess{,.bak_$(date +%F)};
+	echo error_log=$PWD  >> php.ini
+	echo "AddHandler application/x-httpd-php$1 .php" >> .htaccess
+	echo "suPHP_ConfigPath $PWD" >> .htaccess
+	}
+

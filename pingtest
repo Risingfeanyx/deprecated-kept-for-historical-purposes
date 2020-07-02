@@ -1,0 +1,12 @@
+#Process script
+
+#watch 'clear ; echo $(date) >> pings/pingtest$(date +%F) ; ping -c4 google.com >> pings/pingtest$(date +%F) ;tail pingtest'
+
+#bash function incoming. Find out why date doesn't output to file.
+pingtest()
+	{
+	mkdir pings
+	clear ; 
+	echo $(date) |tee pings/$1.$(date +%F)
+	ping -c4 $1 | tee pings/$1.$(date +%F)
+	}

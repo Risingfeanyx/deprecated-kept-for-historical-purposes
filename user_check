@@ -1,0 +1,31 @@
+#Mega deprecated, too much bloat
+user(){
+	clear
+	#ngxutil -Xu $1&
+	fixperms -q --skip-mail $1&
+	sudo cat /var/log/nginx/access.log | grep   IP;
+	sudo cat /usr/local/apache/logs/error_log | grep  IP ;
+	check_software $1 ;
+	account-review $1 ;
+	ps faux | grep $1 | cat >> $1_PS_FAUX_OUTPUT ;
+	cat /etc/redhat-release && /usr/local/cpanel/cpanel -V ;
+	df ;
+	ls /etc/cpanel/ea4/is_ea4 ;
+	hostname -i ;
+	cat /opt/backup/logs/users/$1 | tail -1
+	awk '{print $1}'  /home/$1/.lastlogin
+	# for ip in cat /home/USERNAME/.lastlogin | awk {'print $1'} | grep -v nobody | sort -n | uniq;do unblock $ip;done
+	cat $1_PS_FAUX_OUTPUT ; rm -rf $1_PS_FAUX_OUTPUT ; ps faux | grep $1
+	}
+
+
+
+#cleaner, format as user $USER $IP 
+user(){ 
+	clear; 
+	ngxutil -Xu $1& 
+	/usr/local/cpanel/bin/autossl_check --user=$1; 
+	fixperms -q --skip-mail $1& 
+	sudo cat /var/log/nginx/access.log | grep  $2 ; 	
+	sudo cat /usr/local/apache/logs/error_log | grep  $2 ; 	
+	switch $1; }

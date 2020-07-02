@@ -1,0 +1,11 @@
+back(){
+	/scripts/pkgacct $1
+	mv /home/cpmove-$1.tar.gz /home/$1/public_html
+	chmod 644 /home/$1/public_html/cpmove-$1.tar.gz
+	echo "$2/cpmove-$1.tar.gz" | mail -s "Backup Generated" $3
+	clear
+	}
+	echo "back cPanel username, domain, and email"
+
+#To be used in a root env; you'd create a targz of a cpanel account, and move it to a sites public_html. 
+#Usage back userna5 domain.com

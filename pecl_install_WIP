@@ -1,0 +1,45 @@
+Heads up, all of theses are very much WIP and untested
+
+
+install_pecl_ext version package 
+
+install_pecl_ext_shared()
+	{
+	clear
+	mkdir ~/src/
+	cd ~/src/
+	/opt/php$1/bin/pecl download $2
+	tar -pxf *.tar.gz
+	cd $2*
+	/opt/php$1/bin/phpize
+	./configure --with-php-config=/opt/php$1/bin/php-config
+	make
+	ls -l .libs/*.so
+	mkdir -p ~/php/
+	cp -v .libs/$2.so ~/php/
+	chmod 755 ~/php/$2.so
+	echo "drop this in the sites php.ini"
+	echo "extension=$PWD/php/$2.so"
+	}
+
+
+install_pecl_ext_vps()
+	{
+	pecl channel-update pecl.php.net
+	clear
+	mkdir ~/src/
+	cd ~/src/
+	/opt/cpanel/ea-php$1/root/usr/bin/pecl download $2
+	tar -pxf *.tar.gz
+	cd $2*
+	cd
+	/opt/cpanel/ea-php$1/root/usr/bin/phpize
+	./configure --with-php-config=/opt/php$1/bin/php-config
+	make
+	ls -l .libs/*.so
+	mkdir -p ~/php/
+	cp -v .libs/$2.so ~/php/
+	chmod 755 ~/php/$2.so
+	echo "drop this in the sites php.ini"
+	echo "extension=$PWD/php/$2.so"
+	}

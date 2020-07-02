@@ -1,0 +1,48 @@
+siteinfo()
+	{
+	clear
+	cp -v .htaccess{,.bak_$(date +%F)};
+	cp -v .user.ini.{,.bak_$(date +%F)};
+	cp -v php.ini{,.bak_$(date +%F)};
+	cp -v index.html.{,.bak_$(date +%F)};
+	cp -v index.php.{,.bak_$(date +%F)};
+	echo error_log = $PWD >> php.ini;
+	echo "<?php phpinfo(); ?>" >>phpinfo.php;
+	cat php.ini | grep memory_limit
+	cat php.ini | grep upload_max_filesize
+	cat php.ini | grep post_max_size
+	cat php.ini | grep max_execution_time
+	}
+
+suggestions()
+	{
+	echo "memory_limit=1024M"
+	echo "upload_max_filesize=1000M"
+	echo "post_max_size=1000M"
+	echo "max_execution_time=300"
+	}
+
+
+sed -i 's/old-text/new-text/g' input.txt
+
+
+
+phpini()
+	{
+	clear
+	mv -v php.ini;{,.bak_$(date +%F)};
+	echo disable_functions=no value >> php.ini;
+	echo display_errors=On >> php.ini;
+	echo error_log=$PWD  >> php.ini;
+	echo file_uploads=On >> php.ini;
+	echo log_errors=On >> php.ini;
+	echo log_errors_max_len=1024  >> php.ini;
+	echo max_file_uploads=20 >> php.ini;
+	echo max_input_time=-1 >> php.ini;
+	echo max_input_vars=1000 >> php.ini;       
+	echo upload_max_filesize=2M  >> php.ini;
+	echo memory_limit=1024M >> php.ini; 
+	echo upload_max_filesize=1000M >> php.ini;
+	echo post_max_size=1000M >> php.ini;
+	echo max_execution_time=300 >> php.ini;
+	}

@@ -1,0 +1,22 @@
+dbdump()
+	{
+	clear
+	#Boldgrid/WordPress - 
+	awk -F"'" '/DB_/{print $4}' wp-config.php
+	#Prestashop 1.6 - 
+	cat config/settings.inc.php | grep 'dbname\|username\|password'
+	#Prestashop 1.7
+	cat app/config/parameters.php | grep 'dbname\|username\|password'
+	#Drupal 
+	cat sites/default/settings.php |grep 'dbname\|username\|password'
+	#Moodle 
+	cat config.php | grep 'dbname\|username\|password' 
+	#Magento 
+	cat app/etc/env.php | grep 'dbname\|username\|password'
+	#PHP
+	cat include/connect.php | grep DATABASE
+	echo "mysqldump -p -u username dbname > name.sql"
+	}
+
+#The purpose of this is to be able to view DB credentials for any CMS that uses them. Don't take the PHP one with too much of a grain of salt; as PHP can be all 
+over the place

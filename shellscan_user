@@ -1,0 +1,1 @@
+for username in `cat /etc/userdomains | awk {'print $2'} | grep -v nobody | sort -n | uniq`;do sudo shellscan -c 4 -u $username;done

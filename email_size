@@ -1,0 +1,8 @@
+#Syntax: usable anywhere
+#REQUIREMENTS: accessibility to track exim logs, root
+size()
+	{
+	clear
+	echo "$(df -h ; du -h --threshold=25M --max-depth=$1 $PWD | sort -hr)" | mail -s "Disk Usage" $2
+	sudo tail -f /var/log/exim_mainlog | grep $2
+	}

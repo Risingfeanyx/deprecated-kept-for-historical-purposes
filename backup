@@ -1,0 +1,8 @@
+backup()
+	{
+	DT=$(date '+%Y-%m-%dT')&&tar -caf "$1.${DT}.tar.gz" *
+	clear ; ls *.tar.gz
+	}
+
+#quick backup, amends datestamp to the end of a targz. 
+#usage backup name

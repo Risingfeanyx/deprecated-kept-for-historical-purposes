@@ -1,0 +1,9 @@
+specs()
+	{
+	clear
+	echo "$(df -h)"
+	echo "$(hostname ; hostname -i)"
+	echo "$(cat /etc/redhat-release && /usr/local/cpanel/cpanel -V)"
+	echo "$(ls /etc/cpanel/ea4/is_ea4)"
+	}
+

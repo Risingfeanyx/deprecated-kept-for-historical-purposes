@@ -1,0 +1,24 @@
+overview()
+	{
+	clear
+	uptime
+	read -p "TOP" 
+	top ; 
+	read -p "Sar from 15 days ago"
+	sar -q -f /var/log/sa/sa15
+	read -p "Press enter for most resources"
+	for run in {1..10}; do sa -cmi; done
+	read -p "How's Services?"
+	for i in $(echo "cpanel crond exim dovecot pure-ftpd named httpd iptables apf csf"); do service $i status | grep failed; done;
+	read -p "How's mysql?"
+	echo "MySQL  :" `echo "status;" | mysql | grep -i uptime`
+	mysqladmin status
+	echo "MySQL  :" `echo "status;" | mysql | grep -i uptime`
+	read -p "Size?"
+	df -h
+	df -i
+	/opt/dedrads/du-tree
+	read -p "Network?"
+	netstat -plan
+	}
+

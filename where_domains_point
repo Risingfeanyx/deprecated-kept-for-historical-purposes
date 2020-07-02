@@ -1,0 +1,9 @@
+#!/bin/bash
+for domain in `for a in /var/named/*.db; do echo $(basename $a .db); done`
+do
+   echo $domain $(dig $domain +short; dig ns $domain +short)
+done | column -t
+echo "This is the server  IP $(hostname -i)"
+
+
+

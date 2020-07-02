@@ -1,0 +1,7 @@
+	{
+	clear
+	cp .htaccess{,.pre_https_$(date +%F)}
+	sed -i '1 i\RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]' .htaccess
+	sed -i '1 i\RewriteCond %{HTTPS} off ' .htaccess
+	sed -i '1 i\RewriteEngine On' .htaccess
+	}

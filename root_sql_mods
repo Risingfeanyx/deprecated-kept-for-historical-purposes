@@ -1,0 +1,73 @@
+enable_slow_query_5.5_or_lower()
+	{
+	cd /etc
+	clear
+	cp -v my.cnf{,.bak_$(date +%F)}
+	echo "log-slow-queries = /var/log/slowqueries" >> my.cnf
+	echo "long_query_time = 3" >> my.cnf
+	touch /var/log/slowqueries
+	chown mysql:mysql /var/log/slowqueries
+	chmod 664 /var/log/slowquerie
+	service mysql restart
+	mysql> SET GLOBAL slow_query_log = ON;
+	}
+ 
+enable_slow_query_5.6+()
+	{
+	cd /etc
+	clear
+	echo "slow_query_log = 1 " >> my.cnf
+	echo "slow_query_log_file = /var/log/slowqueries" >> my.cnf
+	echo "long_query_time = 3" >> my.cnf
+	touch /var/log/slowqueries
+	chown mysql:mysql /var/log/slowqueries
+	chmod 664 /var/log/slowquerie
+	service mysql restart
+	mysql> SET GLOBAL slow_query_log = ON;
+	}
+	 
+enable_sql_error_logging()
+	{
+	cd /etc
+	clear
+	cp -v my.cnf{,.bak_$(date +%F)}
+	echo "log-error = /var/log/mysql_error_log" >> my.cnf
+	touch  /var/log/mysql_error_log.err
+	chown mysql:mysql /var/log/mysql_error_log.err
+	chmod 664 /var/log/mysql_error_log.err
+	service mysql restart
+	}
+	
+	
+enable_full_sql_error_logging_<5.4()
+	{
+	clear
+	cd /etc
+	cp -v my.cnf{,.bak_$(date +%F)}
+	echo "general_log=on" >> my.cnf
+	echo "general_log_file=/var/log/mysql-generalquery.log"  >> my.cnf
+	touch /var/log/mysql-generalquery.log
+	chown mysql:mysql /var/log/mysql-generalquery.log
+	chmod 664 /var/log/mysql-generalquery.log
+	}
+
+
+enable_full_sql_error_logging_>5.%()
+	{
+	clear
+	cd /etc
+	cp -v my.cnf{,.bak_$(date +%F)}
+	echo "log=/var/log/mysql-generalquery.log" >> my.cnf
+	touch /var/log/mysql-generalquery.log
+	chown mysql:mysql /var/log/mysql-generalquery.log
+	chmod 664 /var/log/mysql-generalquery.log
+	}
+	
+setting_mysql_time_zone()
+	{
+	clear
+	cd /etc ; cd
+	cp -v my.cnf{,.bak_$(date +%F)}
+	mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
+	mysql> SET time_zone = $1;
+	}

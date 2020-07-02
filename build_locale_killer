@@ -1,0 +1,11 @@
+build_locale_kill()
+	{
+	clear
+	dmesg
+	pkill -9 build_locale_da ;
+	/scripts/upcp --force ;
+	for i in $(echo "cpanel crond exim dovecot pure-ftpd named httpd iptables apf csf"); do service $i restart; done;/scripts/restartsrv_mysql;
+	clear
+	ps faux | grep build_locale_da
+	}
+

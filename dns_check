@@ -1,0 +1,11 @@
+dns()
+	{
+	dig a $1 +short
+	dig txt $1 +short
+	dig ns $1  +short
+	dig mx $1 +short
+	traceroute $1
+	ping $1 -c4
+	whois $1 | grep 'Name\|Domain'
+	}
+#quick and clean dns checker. 

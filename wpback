@@ -1,0 +1,8 @@
+wpbak(){
+	cd $1
+	wp db export&
+	wp config list --skip-{plugins,themes} >> "wp-config.$(date '+%Y-%m-%d')"
+	cd ..
+	tar -zcvf "$1.$(date '+%Y-%m-%d')tar.gz" $1&
+	}
+

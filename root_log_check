@@ -1,0 +1,24 @@
+#ROOT/VPS
+#Syntax: 'err IP ADDRESS'
+err()
+	{
+	clear
+	sudo grep $1 cat /var/log/messages | tail -1
+	sudo grep $1 cat /usr/local/apache/logs/error_log | tail -1
+	sudo grep $1 cat /var/log/nginx/error.log | grep | tail -1
+	sudo grep $1 cat /usr/local/cpanel/logs/access_log | tail -1
+	sudo grep $1 cat /var/log/secure | tail -1
+	sudo grep $1 cat /usr/local/cpanel/logs/login_log | tail -1
+	}
+
+#NON ROOT/SHARED
+err()
+	{
+	clear
+	sudo cat /var/log/messages | grep $1 
+	sudo cat /usr/local/apache/logs/error_log | grep $1 
+	sudo cat /var/log/nginx/error.log | grep $1 grep | grep $1 
+	sudo cat /usr/local/cpanel/logs/access_log | grep $1 
+	sudo cat /var/log/secure | grep $1 
+	sudo cat /usr/local/cpanel/logs/login_log | grep $1 
+	}

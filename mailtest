@@ -1,0 +1,9 @@
+#ROOT
+#Syntax: mailtest test@domain.com
+mailtest()
+  {
+	echo "This is a test email sent on $(date '+%F') by a member of the Technical Support team. Replies are not monitored. Please ignore." | mail -s  "Email Test Support" $1; 
+	clear ;
+	sudo tail -f /var/log/exim_mainlog | grep $1
+	}
+

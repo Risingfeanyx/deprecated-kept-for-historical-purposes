@@ -1,0 +1,7 @@
+pecl_install_()
+	{
+	pecl channel-update pecl.php.net
+	pecl list
+	pecl install $1 <<< ""
+	}
+	

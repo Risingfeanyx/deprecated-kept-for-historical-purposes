@@ -1,0 +1,12 @@
+#creates .txt copies of functions; archives them, and moves them to backups folder. 
+backup_function()
+	{
+	cd /home/$1/public_html/functions/;
+	for f in * ; do 
+	  cp "$f" "$f.txt"
+	done; tar -caf "functions-backup.$(date +%F).tar.gz" *.txt
+	rm -rf *.txt
+	mv *.tar.gz /home/$1/public_html/backups/
+	cd 
+	}
+

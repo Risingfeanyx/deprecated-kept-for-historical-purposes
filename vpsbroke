@@ -1,0 +1,15 @@
+vpsbroke ()
+	{
+	clear
+	echo "##What's that VPS$1 doing"
+	sudo cat /var/log/messages | grep $1 | tail -5
+	echo "##Is VPS$1 suspended?"
+	grep $1 /var/log/suspension.log
+	echo "##Has VPS$1 moved away?	
+	cat /opt/vzmigrate/$1.log
+	echo "##Is VPS$1 moving away?"
+	ls -l /opt/vzmigrate/inprogress/$1
+	echo "##Is VPS$1 napping? alive? full? Lets find out!"
+	vzlist -a -o veid,hostname,ip,status,laverage,description,diskspace,diskinodes | grep $1
+	}
+
