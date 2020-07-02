@@ -1,0 +1,21 @@
+trackDNS()
+{
+IP=$(dig a $1 +short)
+NSIP=$(dig ns $1 +short)
+MX=$(dig mx $1 +short)
+TXT=$(dig txt $1 +short)
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+clear
+echo -e "${RED}IP INFORMATION for $1 ${NC}"
+curl ipinfo.io/$IP
+echo -e "${RED}Auth A, MX and TXT records  @$NSIP for $1 ${NC}"
+dig a $1 @$NSIP  +short
+dig mx $1 @$NSIP +short
+dig txt $1 @$NSIP  +short
+echo -e "${RED}REGISTRY for $1 ${NC}"
+whois $1 | grep 'Name Server\|Expiry\|Domain Status'
+curl -IL  $1 | head -1
+ping -c4 $1
+traceroute $1
+}
