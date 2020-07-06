@@ -1,6 +1,6 @@
 screen_reason()
 	{
-	curl -LA  "foo" https://www.captmemelord.com/functions/.screenrc >> .screenrc.splitscreen_$(date +%F)
+	curl -LA  "foo" https://github.com/Risingfeanyx/dotfiles/edit/master/.screenrc >> .screenrc.splitscreen_$(date +%F)
 	screen -S $(whoami).$(date +%F) -c .screenrc.splitscreen_$(date +%F)
 	rm -rf .screenrc.splitscreen_$(date +%F)
 	clear
