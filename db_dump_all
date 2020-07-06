@@ -1,0 +1,12 @@
+;Dumps all DBS to root/dbbackups, datestamps 
+(
+path="/root/dbbackups-$( date +"%Y-%m-%dT%H:%M:%S%z" )"
+mkdir $path && touch $path/dumplist 
+echo "Dumping into $path"
+for db in $( mysql -e 'show databases' | grep -v "Database\|information_schema\|leechprotect\|cphulkd\|modsec\|mysql\|performance_schema\|roundcube" | awk '{print $1}' ) ; do 
+echo "Dumping $db ..."
+mysqldump --add-drop-table --databases $db > $path/$db.sql
+echo $db >> $path/dumplist
+done
+echo "Logged to $path/dumplist"
+)
