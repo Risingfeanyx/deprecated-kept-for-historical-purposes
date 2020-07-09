@@ -21,28 +21,3 @@ suggestions()
 	echo "post_max_size=1000M"
 	echo "max_execution_time=300"
 	}
-
-
-sed -i 's/old-text/new-text/g' input.txt
-
-
-
-phpini()
-	{
-	clear
-	mv -v php.ini;{,.bak_$(date +%F)};
-	echo disable_functions=no value >> php.ini;
-	echo display_errors=On >> php.ini;
-	echo error_log=$PWD  >> php.ini;
-	echo file_uploads=On >> php.ini;
-	echo log_errors=On >> php.ini;
-	echo log_errors_max_len=1024  >> php.ini;
-	echo max_file_uploads=20 >> php.ini;
-	echo max_input_time=-1 >> php.ini;
-	echo max_input_vars=1000 >> php.ini;       
-	echo upload_max_filesize=2M  >> php.ini;
-	echo memory_limit=1024M >> php.ini; 
-	echo upload_max_filesize=1000M >> php.ini;
-	echo post_max_size=1000M >> php.ini;
-	echo max_execution_time=300 >> php.ini;
-	}
