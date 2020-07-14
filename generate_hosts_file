@@ -1,3 +1,6 @@
 ;in a centos server; generates a list of domains and the current hostname in order to test them prior to a site mig
 
 for a in /var/named/*.db; do  echo "$(hostname -i)" $(basename $a .db); echo  "www.$(basename $a .db)" ; done
+
+;in a centos server; tests all domains to pull http codes
+for a in /var/named/*.db; do  curl -IL www.$(basename $a .db)  | head -1  ; done
