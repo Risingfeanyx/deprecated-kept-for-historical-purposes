@@ -1,0 +1,7 @@
+mysql_bandaid()
+	{
+	systemctl stop mysql;
+	mv /var/lib/mysql/ib_logfile0 /var/lib/mysql/ib_logfile0.bak;
+	mv /var/lib/mysql/ib_logfile1 /var/lib/mysql/ib_logfile1.bak;
+	systemctl start mysql ; systemctl status mysql
+	}
