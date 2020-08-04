@@ -1,0 +1,1 @@
+for i in $(cat /usr/local/apache/domlogs/*.com | awk '{print $1}') ; do  curl ipinfo.io/$i ; done
